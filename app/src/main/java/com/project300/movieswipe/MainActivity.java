@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
            currentUId = user.getUid();
        }
 
-        DatabaseReference currentUserConnectionsDB = usersDb.child("Female").child(currentUId).child("connections").child("yep").child(FilmName);
+        DatabaseReference currentUserConnectionsDB = usersDb.child("Female").child(userID).child("connections").child("yep").child(FilmName);
 
         currentUserConnectionsDB.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
