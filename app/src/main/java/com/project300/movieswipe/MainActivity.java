@@ -99,6 +99,8 @@ public class MainActivity extends AppCompatActivity {
         GetData getData = new GetData();
         getData.execute();
 
+
+
      //   flingContainer.setAdapter(arrayAdapter);
 
 
@@ -134,7 +136,8 @@ public class MainActivity extends AppCompatActivity {
 
                     MovieModelClass items = (MovieModelClass) dataObject;
                     FilmName = items.getName();
-                    usersDb.child("Male").child(currentUId).child("connections").child("nope").child(FilmName).setValue(true);
+                    //male
+                    usersDb.child(currentUId).child("connections").child("nope").child(FilmName).setValue(true);
 
                 Toast.makeText(MainActivity.this, "left", Toast.LENGTH_SHORT).show();
             }
@@ -150,7 +153,10 @@ public class MainActivity extends AppCompatActivity {
 
                     MovieModelClass items = (MovieModelClass) dataObject;
                     FilmName = items.getName();
-                    usersDb.child("Male").child(currentUId).child("connections").child("yep").child(FilmName).setValue(true);
+
+                    //male
+                //you have to be logged in as this for it to work
+                    usersDb.child(currentUId).child("connections").child("yep").child(FilmName).setValue(true);
 
                 isConnectionMatch(currentUId, dataObject);
 
@@ -185,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
 
         MovieModelClass items = (MovieModelClass) dataObject;
         FilmName = items.getName();
-        String userID = "faVjqbbWgEVUpoFGrfW6PhsRTaS2";
+        String userID = "syUQzPGxXZPc9sEqbs9RJwFlTrV2";
 
        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -193,7 +199,9 @@ public class MainActivity extends AppCompatActivity {
            currentUId = user.getUid();
        }
 
-        DatabaseReference currentUserConnectionsDB = usersDb.child("Female").child(userID).child("connections").child("yep").child(FilmName);
+      //female
+
+        DatabaseReference currentUserConnectionsDB = usersDb.child(userID).child("connections").child("yep").child(FilmName);
 
         currentUserConnectionsDB.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -202,9 +210,14 @@ public class MainActivity extends AppCompatActivity {
                 if(snapshot.exists()){
                     Toast.makeText(MainActivity.this, "new connection", Toast.LENGTH_LONG).show();
                     //so this is a male swiping when a female has already swiped
+
                     //usersDb.child(oppositeUserSex).child(snapshot.getKey()).child("connections").child("matches").child(currentUId).setValue(true);
-                    usersDb.child("Female").child(userID).child("connections").child("matches").child(snapshot.getKey()).setValue(true);
-                    usersDb.child("Male").child(currentUId).child("connections").child("matches").child(snapshot.getKey()).setValue(true);
+
+                    //female
+                    usersDb.child(userID).child("connections").child("matches").child(snapshot.getKey()).setValue(true);
+
+                    //male
+                    usersDb.child(currentUId).child("connections").child("matches").child(snapshot.getKey()).setValue(true);
                 }
 
             }
@@ -306,6 +319,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void goToMatches(View view){
+
+        Intent intent = new Intent(MainActivity.this, MatchesActivity.class);
+        startActivity(intent);
+        return;
+
+    }
+
 
 
     public void checkUserSex() {
@@ -405,6 +426,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+
         public void logoutUser(View view) {
 
             mAuth.signOut();
@@ -414,6 +437,9 @@ public class MainActivity extends AppCompatActivity {
             return;
 
         }
+
+
+
     }
 
 

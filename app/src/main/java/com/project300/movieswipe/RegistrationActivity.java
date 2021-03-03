@@ -64,19 +64,19 @@ public class RegistrationActivity extends AppCompatActivity {
 
         mName = (EditText) findViewById(R.id.name);
 
-        mRadioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+       // mRadioGroup = (RadioGroup) findViewById(R.id.radioGroup);
 
 
         mRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final int selectId = mRadioGroup.getCheckedRadioButtonId();
+               // final int selectId = mRadioGroup.getCheckedRadioButtonId();
 
-                final RadioButton radioButton = (RadioButton) findViewById(selectId);
+              //  final RadioButton radioButton = (RadioButton) findViewById(selectId);
 
-                if(radioButton.getText() == null){
-                    return;
-                }
+             //   if(radioButton.getText() == null){
+             //       return;
+             //   }
 
 
                 final String email = mEmail.getText().toString();
@@ -90,7 +90,7 @@ public class RegistrationActivity extends AppCompatActivity {
                             Toast.makeText(RegistrationActivity.this, "sign up error", Toast.LENGTH_SHORT).show();
                         }else{
                             String userId = mAuth.getCurrentUser().getUid();
-                            DatabaseReference currentUserDb = FirebaseDatabase.getInstance().getReference().child("Users").child(radioButton.getText().toString()).child(userId).child("name");
+                            DatabaseReference currentUserDb = FirebaseDatabase.getInstance().getReference().child("Users").child(userId).child("name");
                             currentUserDb.setValue(name);
 
                         }

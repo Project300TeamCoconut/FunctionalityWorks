@@ -14,7 +14,7 @@ android:orientation="vertical"
         android:hint="name"
         android:id="@+id/name"/>
 
-    <RadioGroup
+    <!--<RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/radioGroup">
@@ -31,7 +31,7 @@ android:orientation="vertical"
             android:layout_height="wrap_content"
             android:text="Female"
             />
-    </RadioGroup>
+    </RadioGroup>-->
 
     <EditText
     android:layout_width="match_parent"
