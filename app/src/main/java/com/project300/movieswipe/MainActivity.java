@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     //   List<MovieModelClass> movieList;
     ///**********************************************************************************************
 
+    
 
     // private ArrayList<String> al;
     private cards cards_data[];
@@ -191,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
 
         MovieModelClass items = (MovieModelClass) dataObject;
         FilmName = items.getName();
-        String userID = "syUQzPGxXZPc9sEqbs9RJwFlTrV2";
+        String userID = "YR0YNOCdvBVWOLVtKuY9tdQCU8c2";
 
        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -199,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
            currentUId = user.getUid();
        }
 
-      //female
+      //female////
 
         DatabaseReference currentUserConnectionsDB = usersDb.child(userID).child("connections").child("yep").child(FilmName);
 
@@ -227,6 +228,14 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
+    }
+
+    public void goToSettings(View view) {
+        Intent intent = new Intent(MainActivity.this,SettingsActivity.class);
+        startActivity(intent);
+        return;
 
 
     }

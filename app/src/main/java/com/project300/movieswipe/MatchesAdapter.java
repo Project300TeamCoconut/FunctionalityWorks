@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 //this is the function that takes care of populating itemmatches.xml with the specific layout
@@ -63,7 +65,14 @@ public class MatchesAdapter extends RecyclerView.Adapter<MatchesViewHolders>{
         //we get the postion of the view that is created at that moment
 
         //and get the position of the movie name we want to show
-        holder.mMatchId.setText(matchesList.get(position).getMovieName());
+        holder.mMatchName.setText(matchesList.get(position).getMovieName());
+
+      //  Glide.with(context).load()
+
+
+       // holder.mMatchID.setText(matchesList.get(position).getMovieName());
+
+
 
 
 

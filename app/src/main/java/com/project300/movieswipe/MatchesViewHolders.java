@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class MatchesViewHolders extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    public TextView mMatchId;
+    public TextView mMatchName;
 
 
 
@@ -17,7 +17,8 @@ public class MatchesViewHolders extends RecyclerView.ViewHolder implements View.
 
         itemView.setOnClickListener(this);
 
-        mMatchId = (TextView) itemView.findViewById(R.id.Matchid);
+       // mMatchId = (TextView) itemView.findViewById(R.id.Matchid);
+        mMatchName = (TextView) itemView.findViewById(R.id.MatchName);
 
     }
 
