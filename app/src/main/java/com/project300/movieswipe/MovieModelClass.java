@@ -1,15 +1,18 @@
 package com.project300.movieswipe;
 
+import android.media.Image;
+import android.widget.ImageView;
+
 public class MovieModelClass {
 
     //String id;
     String name;
-  //  String img;
+   String img;
 
     public MovieModelClass(String id, String name, String img) {
     //    this.id = id;
         this.name = name;
-      //  this.img = img;
+        this.img = img;
     }
     public MovieModelClass() {
 
@@ -23,9 +26,9 @@ public class MovieModelClass {
         this.name = name;
     }
 
- //   public void setImg(String img) {
-    //    this.img = img;
-   // }
+    public void setImg(String img) {
+        this.img = img;
+    }
 
   //  public String getId() {
    //     return id;
@@ -35,9 +38,9 @@ public class MovieModelClass {
         return name;
     }
 
-    //public String getImg() {
-    //    return img;
-  //  }
+    public String getImg() {
+       return img;
+    }
 
 
 }

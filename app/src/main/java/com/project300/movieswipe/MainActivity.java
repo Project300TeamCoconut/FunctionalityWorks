@@ -304,8 +304,7 @@ public class MainActivity extends AppCompatActivity {
 
                     //  model.setId(jsonObject1.getString("vote_average"));
                     model.setName(jsonObject1.getString("title"));
-                    //  model.setImg(jsonObject1.getString("poster_path"));
-
+                    model.setImg(jsonObject1.getString("poster_path"));
 
                     //  moviename = jsonObject1.getString("title");
                     //   model.setName(moviename);
