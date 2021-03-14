@@ -47,5 +47,17 @@
         android:text="back">
     </Button>
 
+    <Button
+        android:id="@+id/deleteBTN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Account" />
+
+    <Button
+        android:id="@+id/LogoutBTN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Log Out" />
+
 
 </LinearLayout>

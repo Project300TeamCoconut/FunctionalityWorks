@@ -1,14 +1,20 @@
 package com.project300.movieswipe;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,7 +33,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private TextView mUserID;
 
-    private Button mBack, mConfirm;
+    private Button mBack, mConfirm, deleteAccount, logOut;
 
     //get current user ID
     private FirebaseAuth mAuth;
@@ -38,17 +44,16 @@ public class SettingsActivity extends AppCompatActivity {
 
     private URI resultUri;
 
+    private FirebaseUser firebaseUser;
+
+    private String currentUId;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-
-
-        mNameField = findViewById(R.id.name);
-        mUserID = findViewById(R.id.userID);
-
-        mBack = findViewById(R.id.back);
-        mConfirm = findViewById(R.id.confirm);
 
 
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -56,9 +61,22 @@ public class SettingsActivity extends AppCompatActivity {
             userID = user.getUid();
         }
 
-        mUserID.setText(userID);
-
         mCustomerDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(userID);
+
+
+        mNameField = findViewById(R.id.name);
+        mUserID = findViewById(R.id.userID);
+
+        deleteAccount = findViewById(R.id.deleteBTN);
+        logOut  = findViewById(R.id.LogoutBTN);
+
+        mBack = findViewById(R.id.back);
+        mConfirm = findViewById(R.id.confirm);
+
+
+
+
+        mUserID.setText(userID);
 
         getUserInfo();
 
@@ -74,6 +92,59 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                onBackPressed();
+            }
+        });
+
+        deleteAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(SettingsActivity.this);
+                dialog.setTitle("Are you sure?");
+                dialog.setMessage("Delete this account will result in completely removing your"+ " account from the system and you will no longer be able to log in");
+                dialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()){
+                                    Toast.makeText(SettingsActivity.this, "Account Deleted",
+                                            Toast.LENGTH_LONG).show();
+
+                                    Intent intent = new Intent(SettingsActivity.this, ChooseLoginRegistrationActivity.class);
+                                    startActivity(intent);
+                                }
+                                else{
+                                    Toast.makeText(SettingsActivity.this, task.getException().getMessage(),
+                                            Toast.LENGTH_LONG).show();
+
+                                }
+                            }
+                        });
+                    }
+                });
+
+                dialog.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        dialogInterface.dismiss();
+                    }
+                });
+
+                AlertDialog alertDialog = dialog.create();
+                alertDialog.show();
+            }
+        });
+
+
+        logOut.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                mAuth.getInstance().signOut();
+                Intent intent = new Intent(SettingsActivity.this, ChooseLoginRegistrationActivity.class);
+                startActivity(intent);
+
             }
         });
 
