@@ -1,6 +1,7 @@
 package com.project300.movieswipe;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -9,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 public class MatchesViewHolders extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     public TextView mMatchName;
+
+    public ImageView mMatchImage;
 
 
 
@@ -19,6 +22,7 @@ public class MatchesViewHolders extends RecyclerView.ViewHolder implements View.
 
        // mMatchId = (TextView) itemView.findViewById(R.id.Matchid);
         mMatchName = (TextView) itemView.findViewById(R.id.MatchName);
+      //  mMatchImage = (ImageView) itemView.findViewById(R.id.MatchImage);
 
     }
 

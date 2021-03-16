@@ -5,8 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -22,16 +26,41 @@ public class LoginActivity extends AppCompatActivity {
 
     private Button mLogin;
 
+    private CheckBox showpassword;
+
     private EditText mEmail, mPassword;
 
 
     private FirebaseAuth mAuth;
+
+
+
 
     private FirebaseAuth.AuthStateListener firebaseAuthStateListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+
+        showpassword = findViewById(R.id.showpassword);
+
+        showpassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean b) {
+                if(b){
+                    mPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+
+                }else{
+                    mPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+            }
+        });
+
+
+
+
+
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -74,6 +103,13 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
+
+
+
+
+
+
     }
 
     @Override
@@ -87,4 +123,5 @@ public class LoginActivity extends AppCompatActivity {
         super.onStop();
         mAuth.removeAuthStateListener(firebaseAuthStateListener);
     }
+
 }

@@ -122,6 +122,8 @@ public class MatchesActivity extends AppCompatActivity {
                     String name = "";
                     name = key;
 
+                    String Image ="";
+
 
                  //  if(snapshot.child("name").getValue()!= null){
                      //

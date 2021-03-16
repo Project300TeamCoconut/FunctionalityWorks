@@ -5,9 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -30,6 +34,8 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private RadioGroup mRadioGroup;
 
+
+    private CheckBox showpassword;
 
     private FirebaseAuth mAuth;
 
@@ -54,6 +60,20 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
             }
         };
+
+        showpassword = findViewById(R.id.showpassword);
+
+        showpassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean b) {
+                if(b){
+                    mPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+
+                }else{
+                    mPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+            }
+        });
 
 
         mRegister = (Button) findViewById(R.id.register);

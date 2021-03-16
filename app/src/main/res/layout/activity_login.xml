@@ -14,12 +14,20 @@
         android:id="@+id/email"/>
 
 
-
     <EditText
+        android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="password"
-        android:id="@+id/password"/>
+        android:inputType="textPassword" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Password"
+        android:id="@+id/showpassword">
+
+    </CheckBox>
 
     <Button
         android:layout_width="match_parent"
