@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -51,23 +53,22 @@ public class MainActivity extends AppCompatActivity {
 
     SwipeFlingAdapterView flingContainer;
 
+
+
     private static String JSON_URL = "https://api.themoviedb.org/3/movie/popular?api_key=8099f5720bad1f61f020fdbc855f73db";
 
-    //   List<MovieModelClass> movieList;
-    ///**********************************************************************************************
 
-    
-
-    // private ArrayList<String> al;
     private cards cards_data[];
- //   private arrayAdapter arrayAdapter;
+
     private int i;
 
     private FirebaseAuth mAuth;
 
-   // private String userSex;
+    EditText GetUserID;
 
-    //@InjectView(R.id.frame) SwipeFlingAdapterView flingContainer;
+
+
+
 
     private String currentUId;
 
@@ -75,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
     ListView listView;
 
-  //  List<cards> rowItems;
+
 
     private String userSex;
     private String oppositeUserSex;
@@ -83,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
     final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     String FilmName;
+
+   String MatchFriendID ="";
 
 
 
@@ -95,6 +98,12 @@ public class MainActivity extends AppCompatActivity {
         flingContainer = (SwipeFlingAdapterView) findViewById(R.id.frame);
 
         usersDb = FirebaseDatabase.getInstance().getReference().child("Users");
+
+        GetUserID = findViewById(R.id.UserIDInput);
+
+
+
+
 
 
         GetData getData = new GetData();
@@ -188,11 +197,23 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void GettingUserID(View view) {
+
+        MatchFriendID = GetUserID.getText().toString();
+       // Toast.makeText(MainActivity.this, MatchFriendID, Toast.LENGTH_SHORT).show();
+
+        GetUserID.setText("");
+
+    }
+
    private void isConnectionMatch(String userIDm, Object dataObject) {
 
         MovieModelClass items = (MovieModelClass) dataObject;
         FilmName = items.getName();
-        String userID = "YR0YNOCdvBVWOLVtKuY9tdQCU8c2";
+        String userID = MatchFriendID;
+      // Toast.makeText(MainActivity.this, MatchFriendID, Toast.LENGTH_SHORT).show();
+
+       //"YR0YNOCdvBVWOLVtKuY9tdQCU8c2";
 
        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -239,6 +260,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
 
     public class GetData extends AsyncTask<String, String, String> {
 
@@ -330,6 +353,7 @@ public class MainActivity extends AppCompatActivity {
     public void goToMatches(View view){
 
         Intent intent = new Intent(MainActivity.this, MatchesActivity.class);
+        intent.putExtra("FRIENDID", MatchFriendID);
         startActivity(intent);
         return;
 

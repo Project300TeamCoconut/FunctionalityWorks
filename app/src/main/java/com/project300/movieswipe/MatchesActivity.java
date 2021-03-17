@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,6 +29,8 @@ public class MatchesActivity extends AppCompatActivity {
 
    private String currentUserID;
 
+   String friendID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +43,14 @@ public class MatchesActivity extends AppCompatActivity {
             currentUserID = user.getUid();
         }
 
+        friendID = getIntent().getStringExtra("FRIENDID");
+
+        Toast.makeText(MatchesActivity.this, friendID, Toast.LENGTH_SHORT).show();
+
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+
+
 
 
         //this will allow us to scroll freely through the recycler view with no hicups
@@ -109,7 +118,9 @@ public class MatchesActivity extends AppCompatActivity {
 
     private void FetchMatchInformation(String key) {
 
-        String userID = "YR0YNOCdvBVWOLVtKuY9tdQCU8c2";
+        String userID = friendID;
+
+       // "YR0YNOCdvBVWOLVtKuY9tdQCU8c2";
 
 
         DatabaseReference userDb = FirebaseDatabase.getInstance().getReference().child("Users").child(userID).child("connections").child("matches");
